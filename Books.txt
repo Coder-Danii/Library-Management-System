@@ -1,0 +1,5 @@
+12,kaka,dan,action,true
+13,hand,handy,comic,false
+12,kaka,dan,action,true
+13,hand,handy,comic,true
+14,jek,man,life,true

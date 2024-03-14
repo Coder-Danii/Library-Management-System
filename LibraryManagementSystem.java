@@ -9,7 +9,9 @@ public class LibraryManagementSystem {
         boolean exit = false;
 
         // Display the main menu and handle user input
-        System.out.println("Welcome to the Library Management System!");
+        System.out.println("----------------------------------------------------------------------------------");
+        System.out.println("                 Welcome to the Library Management System!");
+        System.out.println("----------------------------------------------------------------------------------");
         while (!exit) {
             System.out.println("1. Add a Book");
             System.out.println("2. Add a User");
@@ -79,31 +81,73 @@ public class LibraryManagementSystem {
     }
 
     // Method to add a book to the library
+
+
+
     private static void addBook(Library library, Scanner scanner) {
-        System.out.println("Enter Book ID:");
-        int bookID = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        int bookID=0; // Declare bookID as an int variable
+        boolean validInput = false;
+    
+        do {
+            System.out.println("Enter Book ID:");
+            String bookIDString = scanner.nextLine();
+    
+            // Check if the input contains only numeric characters
+            if (bookIDString.matches("\\d+")) {
+                // Convert bookIDString to an int
+                bookID = Integer.parseInt(bookIDString);
+                validInput = true;
+            } else {
+                System.out.println("Invalid input. Please enter the book ID in numbers only.");
+            }
+        } while (!validInput);
+    
         System.out.println("Enter Title:");
         String title = scanner.nextLine();
         System.out.println("Enter Author:");
         String author = scanner.nextLine();
         System.out.println("Enter Genre:");
         String genre = scanner.nextLine();
+    
         Book newBook = new Book(bookID, title, author, genre);
         library.addBook(newBook);
         System.out.println("Book added successfully!");
     }
-
+    
+    
+    
     // Method to add a user to the library
+
+
+    private static boolean isValidUserName(String userName) {
+        // Check if userName contains only letters
+        return userName.matches("[a-zA-Z]+");
+    }
+    
     private static void addUser(Library library, Scanner scanner) {
-        System.out.println("Enter User Name:");
-        String userName = scanner.nextLine();
+        String userName;
+        boolean validInput = false;
+    
+        do {
+            System.out.println("Enter User Name:");
+            userName = scanner.nextLine();
+    
+            // Check if the input contains only letters
+            if (isValidUserName(userName)) {
+                validInput = true;
+            } else {
+                System.out.println("Invalid input. User name can only contain letters.");
+            }
+        } while (!validInput);
+    
         System.out.println("Enter Contact Information:");
         String contactInfo = scanner.nextLine();
+    
         User newUser = new User(userName, contactInfo);
         library.addUser(newUser);
         System.out.println("User added successfully! User ID: " + newUser.getUserID());
     }
+    
 
     // Method to display all books in the library
     private static void displayBooks(Library library) {
